@@ -48,8 +48,8 @@ class ChatGUI(tk.Frame):
         top_row = tb.Frame(self)
         top_row.grid(row=0, column=1)
 
-        self.user_label = tb.Label(top_row, text="USER")
-        self.user_label.pack()
+        self.user_page_button = tb.Button(top_row, text="USER", command=lambda: self.parent_controller.show_frame("user"))
+        self.user_page_button.pack()
 
         # Left column
         left_frame = tb.Frame(self)

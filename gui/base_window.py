@@ -53,6 +53,8 @@ class BaseWindow:
     def show_frame(self, name):
         for frame in self.frames.values():
             frame.pack_forget()
+        if name == "user":
+            self.user_edit_page.refresh_user_name()
         self.frames[name].pack(expand=False, fill="y")
 
     def server_recv(self):

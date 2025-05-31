@@ -40,9 +40,9 @@ class CreateUserGUI(tk.Frame):
         self.passw_entry_two = tb.Entry(self, width=30, textvariable=self.passw_entry_input_two)
         self.passw_entry_two.pack(pady=20)
 
-        self.go_back_button = tb.Button(self, text="Create Account",
+        self.create_account_button = tb.Button(self, text="Create Account",
                                         command=self.create_user)
-        self.go_back_button.pack(pady=20)
+        self.create_account_button.pack(pady=20)
 
         self.go_back_button = tb.Button(self, text="Go back",
                                         command=self.go_back)
