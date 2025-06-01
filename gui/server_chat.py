@@ -102,13 +102,14 @@ class ChatGUI(tk.Frame):
         self.parent_controller.show_frame("login")
 
     def update_text(self, user, msg):
-        self.chat_text.see(tk.END)
         self.chat_text.config(state=tk.NORMAL)
         if self.previous_chat_user != user:
-            self.chat_text.insert(tk.INSERT, user+"\n", "bold")
+            print("True")
+            self.chat_text.insert("end", user+"\n", "bold")
             self.previous_chat_user = user
-        self.chat_text.insert(tk.INSERT, msg+"\n")
+        self.chat_text.insert("end", msg+"\n")
         self.chat_text.config(state=tk.DISABLED)
+        self.chat_text.see(tk.END)
 
     def message_send(self, event=None):
         client = self.parent_controller.client_socket
