@@ -3,7 +3,8 @@ import ttkbootstrap as tb
 
 HEADER = 64
 FORMAT = "utf-8"
-
+bold_font = ("Helvetica", 11, "bold")
+font = ("Helvetica", 11)
 
 def ou_update(frame, user_frame, ou_dict):
     ou_list = ou_dict["online_users"]
@@ -31,10 +32,6 @@ def ou_update(frame, user_frame, ou_dict):
             row += 1
 
 
-    for widget in user_frame.winfo_children():
-        print(widget)
-
-
 class ChatGUI(tk.Frame):
 
     def __init__(self, parent, parent_controller):
@@ -46,30 +43,33 @@ class ChatGUI(tk.Frame):
 
         # Top row
         top_row = tb.Frame(self)
-        top_row.grid(row=0, column=1)
+        top_row.grid(row=0, column=1, sticky="ew")
 
         self.user_page_button = tb.Button(top_row, text="USER", command=lambda: self.parent_controller.show_frame("user"))
-        self.user_page_button.pack()
+        self.user_page_button.pack(pady=10, side="right")
 
         # Left column
-        left_frame = tb.Frame(self)
+        left_frame = tk.Frame(self)
         left_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
         chat_text_frame = tb.Frame(left_frame)
         chat_text_frame.pack(fill="both", expand=True)
 
-        self.chat_text = tk.Text(chat_text_frame, width=110)
+        self.chat_text = tk.Text(chat_text_frame, width=110, font=font)
         self.chat_text.grid(row=0, column=0, sticky="nsew")
         self.chat_text.config(state=tk.DISABLED)
+        self.chat_text.tag_configure("bold", font=bold_font)
 
-        scrollbar = tb.Scrollbar(chat_text_frame)
-        scrollbar.grid(row=0, column=1, sticky="ns")
-        self.chat_text.config(yscrollcommand=scrollbar.set)
+        # scrollbar = tb.Scrollbar(chat_text_frame)
+        # scrollbar.grid(row=0, column=1, sticky="ns")
+        # self.chat_text.config(yscrollcommand=scrollbar.set)
 
         self.msg_entry_input = tk.StringVar()
         self.msg_entry = tb.Entry(left_frame, width=100, textvariable=self.msg_entry_input)
         self.msg_entry.pack(pady=20)
         self.msg_entry.bind("<Return>", self.message_send)
+
+        self.previous_chat_user = ""
 
         self.send_button = tb.Button(left_frame, text="Send", style="success", width=20, command=self.message_send)
         self.send_button.pack(pady=20, padx=20)
@@ -79,7 +79,7 @@ class ChatGUI(tk.Frame):
         self.logout_button.pack()
 
         # Right column
-        self.right_frame = tb.Frame(self)
+        self.right_frame = tk.Frame(self)
         self.right_frame.grid(row=1, column=1, sticky="nsew", padx=10, pady=10)
 
         self.user_logged_in = tb.Label(self.right_frame, text=self.parent_controller.user_name)
@@ -88,7 +88,7 @@ class ChatGUI(tk.Frame):
         self.online_users_label = tb.Label(self.right_frame, text="Online users - 0", name="ou_label")
         self.online_users_label.pack()
 
-        self.online_users_column = tb.Frame(self.right_frame)
+        self.online_users_column = tk.Frame(self.right_frame)
         self.online_users_column.pack()
 
     # FUNCTIONS ---------------------------------------------------------------------------
@@ -101,11 +101,14 @@ class ChatGUI(tk.Frame):
 
         self.parent_controller.show_frame("login")
 
-    def update_text(self, text):
-        self.chat_text.config(state=tk.NORMAL)
-        self.chat_text.insert(tk.INSERT, text+"\n")
-        self.chat_text.config(state=tk.DISABLED)
+    def update_text(self, user, msg):
         self.chat_text.see(tk.END)
+        self.chat_text.config(state=tk.NORMAL)
+        if self.previous_chat_user != user:
+            self.chat_text.insert(tk.INSERT, user+"\n", "bold")
+            self.previous_chat_user = user
+        self.chat_text.insert(tk.INSERT, msg+"\n")
+        self.chat_text.config(state=tk.DISABLED)
 
     def message_send(self, event=None):
         client = self.parent_controller.client_socket

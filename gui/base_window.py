@@ -81,7 +81,8 @@ class BaseWindow:
                 elif activity_tag == "<c>":
                     msg_length = client.recv(HEADER).decode(FORMAT)
                     msg = client.recv(int(msg_length)).decode(FORMAT)
-                    self.frames["chat"].update_text(msg)
+                    user = client.recv(HEADER).decode(FORMAT)
+                    self.chat_gui.update_text(user, msg)
                 elif activity_tag == "<n>":
                     found = client.recv(HEADER).decode(FORMAT)
                     if found == "True":
