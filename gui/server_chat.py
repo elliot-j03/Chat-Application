@@ -98,13 +98,15 @@ class ChatGUI(tk.Frame):
     def logout(self):
         tag = "<o>".encode(FORMAT)
         self.parent_controller.client_socket.send(tag)
+        self.chat_text.config(state=tk.NORMAL)
+        self.chat_text.delete("1.0", "end")
+        self.chat_text.config(state=tk.DISABLED)
 
         self.parent_controller.show_frame("login")
 
     def update_text(self, user, msg):
         self.chat_text.config(state=tk.NORMAL)
         if self.previous_chat_user != user:
-            print("True")
             self.chat_text.insert("end", user+"\n", "bold")
             self.previous_chat_user = user
         self.chat_text.insert("end", msg+"\n")
@@ -128,3 +130,11 @@ class ChatGUI(tk.Frame):
         client.send(message)
 
         self.msg_entry.delete(0, tk.END)
+    
+    def load_prev_chat(self, chat):
+        for c in chat:
+            self.chat_text.config(state=tk.NORMAL)
+            self.chat_text.insert("end", c)
+            self.chat_text.config(state=tk.DISABLED)
+            self.chat_text.see(tk.END)
+

@@ -99,6 +99,17 @@ def update_online_users(c_info):
             client.sendall(ou_json.encode(FORMAT))
 
 
+def load_prev_chat(client):
+    chat: list = []
+    with open("server_chat.txt", "r") as file:
+        for line in file.readlines():
+            chat.append(line)
+    tag = "<i>".encode(FORMAT)
+    chat_json = json.dumps(chat)
+    client.send(tag)
+    client.send(chat_json.encode(FORMAT))
+
+
 def add_user(client):
     user_length = int(client.recv(HEADER).decode(FORMAT))
     user_name = client.recv(user_length).decode(FORMAT)
@@ -165,6 +176,10 @@ class ServerGUI:
             msg_encoded = (client.recv(msg_length))
             msg = msg_encoded.decode(FORMAT)
 
+            # Chat log
+            with open("server_chat.txt", "a") as file:
+                file.writelines(msg+"\n")
+
             # server text
             text = f"{user_name}: {msg}"
             self.update_text_local(text)
@@ -180,6 +195,8 @@ class ServerGUI:
             if success:
                 clients_info.append(cds)
                 text = f"{cds.user_name} is online"
+                load_prev_chat(client)
+                time.sleep(0.5)
                 update_online_users(clients_info)
                 self.update_text_local(text)
             else:
