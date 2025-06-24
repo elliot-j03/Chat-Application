@@ -140,6 +140,7 @@ class ServerGUI:
         self.server_socket = None
         self.running = False
         self.online_users = None
+        self.previous_chat_user = ""
 
         button_frame = tb.Frame(self.root)
         button_frame.pack()
@@ -167,6 +168,13 @@ class ServerGUI:
         self.chat_text.config(state=tk.NORMAL)
         self.chat_text.insert(tk.END, text+"\n")
         self.chat_text.config(state=tk.DISABLED)
+    
+    def update_chat_log(self, msg, user_name):
+        with open("server_chat.txt", "a") as file:
+            if self.previous_chat_user != user_name:
+                file.writelines("!"+user_name+"\n")
+                self.previous_chat_user = user_name
+            file.writelines(msg+"\n")
 
     def msg_handle(self, client, user_name):
         msg_length_encoded = client.recv(HEADER)
@@ -177,14 +185,13 @@ class ServerGUI:
             msg = msg_encoded.decode(FORMAT)
 
             # Chat log
-            with open("server_chat.txt", "a") as file:
-                file.writelines(msg+"\n")
+            self.update_chat_log(msg, user_name)
 
-            # server text
+            # Server text
             text = f"{user_name}: {msg}"
             self.update_text_local(text)
 
-            # client text
+            # Client text
             update_text_client(msg, user_name)
 
     def client_requests(self, tag, client, cds):

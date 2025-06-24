@@ -132,9 +132,12 @@ class ChatGUI(tk.Frame):
         self.msg_entry.delete(0, tk.END)
     
     def load_prev_chat(self, chat):
+        self.chat_text.config(state=tk.NORMAL)
         for c in chat:
-            self.chat_text.config(state=tk.NORMAL)
-            self.chat_text.insert("end", c)
-            self.chat_text.config(state=tk.DISABLED)
-            self.chat_text.see(tk.END)
-
+            if c[0] == "!":
+                un = c.replace("!", "")
+                self.chat_text.insert("end", un, "bold")
+            else:
+                self.chat_text.insert("end", c)
+        self.chat_text.config(state=tk.DISABLED)
+        self.chat_text.see(tk.END)
