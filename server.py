@@ -103,10 +103,16 @@ def load_prev_chat(client):
     chat: list = []
     with open("server_chat.txt", "r") as file:
         for line in file.readlines():
-            chat.append(line)
+            chat.append(line.strip())
     tag = "<i>".encode(FORMAT)
     chat_json = json.dumps(chat)
     client.send(tag)
+
+    json_len = len(chat_json)
+    send_len = str(json_len).encode(FORMAT)
+    send_len += b" " * (HEADER - len(send_len))
+    
+    client.send(send_len)
     client.send(chat_json.encode(FORMAT))
 
 
@@ -202,9 +208,9 @@ class ServerGUI:
             if success:
                 clients_info.append(cds)
                 text = f"{cds.user_name} is online"
+
                 load_prev_chat(client)
-                time.sleep(0.5)
-                update_online_users(clients_info)
+                #update_online_users(clients_info)
                 self.update_text_local(text)
             else:
                 pass

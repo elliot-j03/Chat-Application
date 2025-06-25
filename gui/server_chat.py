@@ -136,8 +136,8 @@ class ChatGUI(tk.Frame):
         for c in chat:
             if c[0] == "!":
                 un = c.replace("!", "")
-                self.chat_text.insert("end", un, "bold")
+                self.chat_text.insert("end", un+"\n", "bold")
             else:
-                self.chat_text.insert("end", c)
+                self.chat_text.insert("end", c+"\n")
         self.chat_text.config(state=tk.DISABLED)
         self.chat_text.see(tk.END)

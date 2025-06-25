@@ -97,7 +97,9 @@ class BaseWindow:
                     print(online_users["online_users"])
                     ou_update(self.chat_gui.right_frame, self.chat_gui.online_users_column, online_users)
                 elif activity_tag == "<i>":
-                    chat_json = client.recv(HEADER).decode(FORMAT)
+                    chat_json_len = int(client.recv(HEADER).decode(FORMAT))
+                    print(chat_json_len)
+                    chat_json = client.recv(chat_json_len).decode(FORMAT)
                     chat: list = json.loads(chat_json)
                     self.chat_gui.load_prev_chat(chat)
                 elif activity_tag == "<f>":
