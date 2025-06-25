@@ -116,20 +116,20 @@ class ChatGUI(tk.Frame):
     def message_send(self, event=None):
         client = self.parent_controller.client_socket
 
-        tag = "<c>".encode(FORMAT)
-        client.send(tag)
-
         chat_msg = self.msg_entry.get()
+        if chat_msg != "":
+            tag = "<c>".encode(FORMAT)
+            client.send(tag)
 
-        message = chat_msg.encode(FORMAT)
-        msg_length: int = len(message)
-        send_length = str(msg_length).encode(FORMAT)
-        send_length += b" " * (HEADER - len(send_length))
+            message = chat_msg.encode(FORMAT)
+            msg_length: int = len(message)
+            send_length = str(msg_length).encode(FORMAT)
+            send_length += b" " * (HEADER - len(send_length))
 
-        client.send(send_length)
-        client.send(message)
+            client.send(send_length)
+            client.send(message)
 
-        self.msg_entry.delete(0, tk.END)
+            self.msg_entry.delete(0, tk.END)
     
     def load_prev_chat(self, chat):
         self.chat_text.config(state=tk.NORMAL)

@@ -210,7 +210,7 @@ class ServerGUI:
                 text = f"{cds.user_name} is online"
 
                 load_prev_chat(client)
-                #update_online_users(clients_info)
+                update_online_users(clients_info)
                 self.update_text_local(text)
             else:
                 pass
