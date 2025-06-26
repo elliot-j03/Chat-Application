@@ -50,37 +50,40 @@ class ChatGUI(tk.Frame):
 
         # Left column
         left_frame = tk.Frame(self)
-        left_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+        left_frame.grid(row=1, column=0, sticky="n")
 
-        chat_text_frame = tb.Frame(left_frame)
-        chat_text_frame.pack(fill="both", expand=True)
+        left_title = tb.Label(left_frame, text="Chats")
+        left_title.pack(pady=20)
 
-        self.chat_text = tk.Text(chat_text_frame, width=110, font=font)
-        self.chat_text.grid(row=0, column=0, sticky="nsew")
+        # Main column
+        main_frame = tk.Frame(self)
+        main_frame.grid(row=1, column=1, sticky="nsew", padx=10, pady=10)
+
+        self.chat_text = tk.Text(main_frame, width=110, font=font)
+        self.chat_text.grid(row=0, column=0)
         self.chat_text.config(state=tk.DISABLED)
         self.chat_text.tag_configure("bold", font=bold_font)
 
-        # scrollbar = tb.Scrollbar(chat_text_frame)
-        # scrollbar.grid(row=0, column=1, sticky="ns")
-        # self.chat_text.config(yscrollcommand=scrollbar.set)
-
+        entry_frame = tk.Frame(main_frame)
+        entry_frame.grid(row=1, column=0)
+        
         self.msg_entry_input = tk.StringVar()
-        self.msg_entry = tb.Entry(left_frame, width=100, textvariable=self.msg_entry_input)
-        self.msg_entry.pack(pady=20)
+        self.msg_entry = tb.Entry(entry_frame, width=100, textvariable=self.msg_entry_input)
+        self.msg_entry.grid(row=0, column=0, pady=5)
         self.msg_entry.bind("<Return>", self.message_send)
 
         self.previous_chat_user = ""
 
-        self.send_button = tb.Button(left_frame, text="Send", style="success", width=20, command=self.message_send)
-        self.send_button.pack(pady=20, padx=20)
+        self.send_button = tb.Button(entry_frame, text=">", style="success", width=2, command=self.message_send)
+        self.send_button.grid(row=0, column=1, pady=5)
 
-        self.logout_button = tb.Button(left_frame, text="Log out", style="danger", width=20,
+        self.logout_button = tb.Button(entry_frame, text="L/O", style="danger", width=4,
                                        command=self.logout)
-        self.logout_button.pack()
+        self.logout_button.grid(row=1, sticky="w")
 
         # Right column
         self.right_frame = tk.Frame(self)
-        self.right_frame.grid(row=1, column=1, sticky="nsew", padx=10, pady=10)
+        self.right_frame.grid(row=1, column=2, sticky="n", padx=10, pady=10)
 
         self.user_logged_in = tb.Label(self.right_frame, text=self.parent_controller.user_name)
         self.user_logged_in.pack(pady=20)
