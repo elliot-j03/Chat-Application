@@ -1,0 +1,31 @@
+This shows the tags sent before each client or server request. Under each tag is path that
+each tag travels across scripts in order, along with a brief explanation of what occurs
+at each point.
+
+<l>:
+    login.py => server.py: sends username and passw in server
+    server.py => base_window.py: sends success result from login_handle()
+    base_window: if login successful, triggers chat screen
+<o>:
+    server_chat => server.py: sends logout request to server
+    server.py: removes client object from clients_info, user goes offline
+<n>:
+    create_user.py => server.py: sends new user_name to server, triggers new_user_check()
+    server.py => base_window.py: sends result of user_name_find()
+    base_window.py: sets create_user_gui.user_taken value, triggers result
+<a>:
+    create_user => server.py: sends new username and passw to server
+    server.py: adds new details to user_data.txt
+<c>:
+    server_chat.py => server.py: sends chat message to server, updates server and server_chat.txt
+    server.py => base_window.py: sends all clients the message and corresponding user
+    base_window.py: updates the chat of the client
+<u>:
+    server.py => base_window: on <l>, sends list of online users to client
+    base_window: updates online user list for clients
+<i>:
+    server.py => base_window: on <l>, sends the log of previous chat to client
+    base_window.py: loads previous chat for client
+<f>:
+    server.py => base_window.py: informs clients of server shutdown
+    base_window.py: closes the client socket and shows startup
