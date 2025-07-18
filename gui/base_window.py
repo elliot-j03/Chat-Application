@@ -63,7 +63,7 @@ class BaseWindow:
             try:
                 activity_tag_encoded = client.recv(3)
                 activity_tag = activity_tag_encoded.decode(FORMAT)
-                print(activity_tag)
+                print(f"activity tag: {activity_tag}")
                 if not activity_tag:
                     self.frames["chat"].logout()
                     break
@@ -106,12 +106,27 @@ class BaseWindow:
 
                     chat: list = json.loads(chat_json)
                     self.chat_gui.load_prev_chat(chat)
+                elif activity_tag == "<r>":
+                    found = client.recv(HEADER).decode(FORMAT)
+                    if found == "True":
+                        self.user_edit_page.change_name_page.error_label.config(text="This username is already taken", foreground="#eb4b3d")
+                    else:
+                        new_user_name = client.recv(HEADER).decode(FORMAT)
+                        self.user_name = new_user_name
+                        self.user_edit_page.refresh_user_name()
+
+                        self.chat_gui.refresh_user_name()
+                        self.chat_gui.chat_text.config(state=tk.NORMAL)
+                        self.chat_gui.chat_text.delete("1.0", "end")
+                        self.chat_gui.chat_text.config(state=tk.DISABLED)
+
+                        self.user_edit_page.change_name_page.error_label.config(text="Username successfully changed", foreground="#79f56e")
                 elif activity_tag == "<f>":
                     self.client_socket.close()
                     self.show_frame("startup")
                     break
             except Exception as e:
-                print(f"An error has occurred: {e}")
+                print(f"[CLIENT] An error has occurred: {e}")
                 self.client_socket.close()
                 self.show_frame("startup")
                 break

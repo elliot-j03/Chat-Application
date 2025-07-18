@@ -3,7 +3,7 @@ each tag travels across scripts in order, along with a brief explanation of what
 at each point.
 
 <l>:
-    login.py => server.py: sends username and passw in server
+    login.py => server.py: sends username and passw to server
     server.py => base_window.py: sends success result from login_handle()
     base_window: if login successful, triggers chat screen
 <o>:
@@ -29,3 +29,7 @@ at each point.
 <f>:
     server.py => base_window.py: informs clients of server shutdown
     base_window.py: closes the client socket and shows startup
+<r>: 
+    user_page.py => server.py: sends current user name and new user name to server
+    server.py => base_window.py: sends the result of user_name_find, if successful updates username
+    base_window.py: updates the change name popup
