@@ -175,7 +175,7 @@ class ServerGUI:
         self.style = tb.Style(theme="darkly")
         self.root.title("EJ-cord Server Manager")
         self.root.geometry("1080x720")
-        self.root.iconphoto(False, ImageTk.PhotoImage(Image.open("mupasaur_icon_headphones.png")))
+        self.root.iconphoto(False, ImageTk.PhotoImage(Image.open("assets/mupasaur_icon_headphones.png")))
 
         self.server_socket = None
         self.running = False
@@ -397,4 +397,10 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ServerGUI(root)
     root.mainloop()
-    app.server_socket.close()
+    try:
+        app.server_socket.close()
+    except AttributeError as e:
+        print(f"[SERVER] An error has occurred: Tried to close an unopened server")
+    except Exception as e:
+        print(f"[SERVER] An error has occurred: {e}")
+

@@ -5,7 +5,6 @@ __pycache__/
 *$py.class
 .DS__Store
 Thumbs.db
-*.png
 *.jpg
 user_data.txt
 server_chat.txt

@@ -22,7 +22,7 @@ class BaseWindow:
         self.style = tb.Style(theme="darkly")
         self.root.title("EJ-cord")
         self.root.geometry("1080x720")
-        self.root.iconphoto(False, ImageTk.PhotoImage(Image.open("mupasaur_icon_headphones.png")))
+        self.root.iconphoto(False, ImageTk.PhotoImage(Image.open("assets/mupasaur_icon_headphones.png")))
 
         self.client_socket = None
 
