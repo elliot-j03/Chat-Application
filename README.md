@@ -6,7 +6,7 @@ Stuff
 * TTKBootstrap
 * PIL
 ## Preview
-gif
+gifs
 ## Set-Up
 ### To try this code out for yourself, please follow the steps below...
 First of all, make sure you have python installed on your system. If not, you can get it here on the [official website](https://www.python.org/downloads/) <br>
@@ -27,9 +27,17 @@ and use pip to download what you need
 ```console
 pip install -r requirement.txt
 ```
-Now you should be set up correctly and able to run the mini engine.<br>
-To run the program you need to run both **server.py** and **client.py**. You can do this by either running them in your editor or using the terminal as shown below
+Now you should be set up correctly and able to run the mini engine.
+For the chat application to work, you need to run both **server.py** and **client.py**. You can do this by either running them in your editor or using the terminal as shown below. If you're 
+using the terminal, please open two separate terminals and virtual environments for each script. You **DO NOT** need to install the modules again.<br>
+### Terminal 1:
 ```console
+source .venv/Scripts/activate
 python path/to/server.py
+```
+### Terminal 2:
+```console
+source .venv/Scripts/activate
 python path/to/client.py
 ```
+If you want more than one client running (which you probably will), you can simply open another terminal for the second **client.py**
