@@ -34,7 +34,7 @@ source .venv/Scripts/activate
 ```
 and use pip to download what you need
 ```console
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 Now you should be set up correctly and able to run the chat application.
 For the chat application to work, you need to run both **server.py** and **client.py**. You can do this by either running them in your editor or using the terminal as shown below. If you're 
