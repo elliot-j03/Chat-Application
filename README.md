@@ -24,7 +24,7 @@ Next, copy the code from this repository into your own editor, or alternatively 
 ```console
 git clone https://github.com/elliot-j03/Chat-Application.git
 ```
-If you havent already got a .venv file in your directory, run this command to create a new one
+If you haven't already got a .venv file in your directory, run this command to create a new one
 ```console
 python -m venv .venv
 ```
