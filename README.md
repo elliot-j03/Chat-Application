@@ -1,5 +1,5 @@
 # Desktop Chat Application
-A simple chat application that allows users to communicate with each other through text-based messaging. The use of websockets allows for real-time updates for all clients connected to the server. The **server.py** script is used for running and shutting down the server, and the **client.py** script is used to handle the client's gui.<br>
+A simple chat application that allows users to communicate with each other through text-based messaging. The use of websockets allows for real-time updates for all clients connected to the server. The **server.py** script is used for running and shutting down the server, and the **client.py** script is used to handle the client's gui. My aim in this project was not to create an amazing looking gui, but to practice and improve my programming skills.<br>
 
 ### Tag System
 In order to deal with the many requests that users need to make across the app, I implemented a custom tag system. Each request sends an identifying tag in the form of **"\<_\>"**, replacing **"\_"** with the corresponding letter. Each request comes from the client's GUI components, which is then sent to **server.py** to be handled and sent back to **base_window.py**, resulting in a change on client side. The path of each is explained on **tags.txt** in the repository.<br>
@@ -15,7 +15,29 @@ When chatting, users will type their message into the input box at the bottom of
 * TTKBootstrap
 * PIL
 ## Preview
-gifs
+### The Client
+The client logs in and sends chats:<br>
+
+<img src="https://github.com/user-attachments/assets/369dd940-ad3c-4913-a478-b186c82bd3da" alt="Log in and Chat" width="800"/>
+
+Multiple clients chat and one leaves, updating the list of online users:<br>
+
+<img src="https://github.com/user-attachments/assets/d7b04aa7-8f5a-482a-9720-4d6a863d82aa" alt="Multiple clients" width="800"/>
+
+The client creating a new account:<br>
+
+<img src="https://github.com/user-attachments/assets/12651ef9-1058-4655-81fa-14d90900d520" alt="New user" width="800"/>
+
+
+The client tries and fails to connect:<br>
+
+<img src="https://github.com/user-attachments/assets/53b46015-ebe6-45a7-8585-e60a17f6e9d2" alt="Cant Connect" width="800"/>
+
+### The Server
+The server gui, controls if the server is running and shows a log of the server activity<br>
+
+<img width="800" alt="Screenshot 2025-08-22 234443" src="https://github.com/user-attachments/assets/07945c17-bea3-4179-a95f-04f44392b84d" />
+
 ## Set-Up
 ### To try this code out for yourself, please follow the steps below...
 First of all, make sure you have python installed on your system. If not, you can get it here on the [official website](https://www.python.org/downloads/) <br>
