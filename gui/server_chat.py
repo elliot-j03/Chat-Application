@@ -52,8 +52,8 @@ class ChatGUI(tk.Frame):
         left_frame = tk.Frame(self)
         left_frame.grid(row=1, column=0, sticky="n")
 
-        left_title = tb.Label(left_frame, text="Chats")
-        left_title.pack(pady=20)
+        # left_title = tb.Label(left_frame, text="Chats")
+        # left_title.pack(pady=20)
 
         # Main column
         main_frame = tk.Frame(self)
