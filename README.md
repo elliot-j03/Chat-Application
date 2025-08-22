@@ -34,7 +34,7 @@ The client tries and fails to connect:<br>
 <img src="https://github.com/user-attachments/assets/53b46015-ebe6-45a7-8585-e60a17f6e9d2" alt="Cant Connect" width="800"/>
 
 ### The Server
-The server gui, controls if the server is running and shows a log of the server activity<br>
+The server gui, controls if the server is running and shows a log of the server activity:<br>
 
 <img width="800" alt="Screenshot 2025-08-22 234443" src="https://github.com/user-attachments/assets/07945c17-bea3-4179-a95f-04f44392b84d" />
 
