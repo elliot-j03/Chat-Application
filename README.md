@@ -1,4 +1,9 @@
 # Desktop Chat Application
+[Description](#description)<br>
+[Libraries](#libraries)<br>
+[Preview](#preview)<br>
+[Set-Up](#set-up)<br>
+## Description
 A simple chat application that allows users to communicate with each other through text-based messaging. The use of websockets allows for real-time updates for all clients connected to the server. The **server.py** script is used for running and shutting down the server, and the **client.py** script is used to handle the client's gui. My aim in this project was not to create an amazing looking gui, but to practice and improve my programming skills.<br>
 
 ### Tag System
